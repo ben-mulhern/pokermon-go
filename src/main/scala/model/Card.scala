@@ -34,13 +34,14 @@ case object Ace extends Rank {val value = 14}
 case class Deck(cards: List[Card]) {
   def shuffle: Deck = Deck(util.Random.shuffle(cards))
   val size: Int = cards.size
-  val nextCard: (Card, Deck) = (cards.head, Deck(cards.tail))
+  def nextCard: (Card, Deck) = (cards.head, Deck(cards.tail))
 }
 
 object Deck {
   val allSuits: List[Suit] = List(Spades, Hearts, Diamonds, Clubs)
   val allRanks: List[Rank] = List(Two, Three, Four, Five, Six, Seven, Eight,
     Nine, Ten, Jack, Queen, King, Ace)
+
   def newDeck: Deck = {
     val cards =
       for (s <- allSuits;
