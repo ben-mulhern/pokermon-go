@@ -33,8 +33,8 @@ case object Ace extends Rank {val value = 14}
 
 case class Deck(cards: List[Card]) {
   def shuffle: Deck = Deck(util.Random.shuffle(cards))
-  def size: Int = cards.size
-  def nextCard: (Card, Deck) = (cards.head, Deck(cards.tail))
+  val size: Int = cards.size
+  val nextCard: (Card, Deck) = (cards.head, Deck(cards.tail))
 }
 
 object Deck {
@@ -45,6 +45,6 @@ object Deck {
     val cards =
       for (s <- allSuits;
            r <- allRanks) yield Card(s, r)
-    Deck(cards).shuffle
+    Deck(cards)
   }
 }
