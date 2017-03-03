@@ -8,7 +8,7 @@ val hand = PokerHand(h.head, h(1), h(2), h(3), h(4))
 
 hand.score
 
-val testFlush = PokerHand(
+val testFlush1 = PokerHand(
   Card(Hearts, Two),
   Card(Hearts, Five),
   Card(Hearts, Seven),
@@ -16,8 +16,14 @@ val testFlush = PokerHand(
   Card(Hearts, King)
 )
 
-testFlush.score
+val testFlush2 = PokerHand(
+  Card(Spades, Two),
+  Card(Spades, Five),
+  Card(Spades, Seven),
+  Card(Spades, Four),
+  Card(Spades, King)
+)
 
+testFlush1.equals(testFlush2)
 
-
-
+testFlush1 == testFlush2

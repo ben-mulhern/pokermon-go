@@ -3,9 +3,12 @@ package model
 /**
   * Created by mulhernb on 02/03/17.
   */
-case class PokerHand (c1: Card, c2: Card, c3: Card, c4: Card, c5: Card) {
+case class PokerHand (c1: Card, c2: Card, c3: Card, c4: Card, c5: Card) extends Ordered[PokerHand] {
 
-  private val h = List(c1, c2, c3, c4, c5).sortBy(_.rank.value).reverse
+  def compare(that: PokerHand) = this.score.compare(that.score)
+  def equals(that: PokerHand) = (this.score == that.score)
+
+  private val h = List(c1, c2, c3, c4, c5).sorted.reverse
 
   if (h.distinct.size != 5) throw new Exception("Hand has duplicates!")
 

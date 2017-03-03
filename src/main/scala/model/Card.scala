@@ -3,8 +3,9 @@ package model
 /**
   * Created by mulhernb on 23/02/17.
   */
-case class Card(suit: Suit, rank: Rank) {
+case class Card(suit: Suit, rank: Rank) extends Ordered[Card] {
   override def toString = s"$rank of $suit"
+  def compare(that: Card) = this.rank.compare(that.rank)
 }
 
 sealed trait Suit
