@@ -8,6 +8,15 @@ val hand = PokerHand(h.head, h(1), h(2), h(3), h(4))
 
 hand.score
 
+val testFlush = PokerHand(
+  Card(Hearts, Two),
+  Card(Hearts, Five),
+  Card(Hearts, Seven),
+  Card(Hearts, Four),
+  Card(Hearts, King)
+)
+
+testFlush.score
 
 
 

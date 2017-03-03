@@ -5,11 +5,11 @@ package model
   */
 case class PokerHand (c1: Card, c2: Card, c3: Card, c4: Card, c5: Card) {
 
-  private val h = List(c1, c2, c3, c4, c5)
+  private val h = List(c1, c2, c3, c4, c5).sortBy(_.rank.value).reverse
 
   if (h.distinct.size != 5) throw new Exception("Hand has duplicates!")
 
-  private val orderedRanks: List[Rank] = h.map(_.rank).sorted.reverse
+  private val orderedRanks: List[Rank] = h.map(_.rank)
 
   private val flush: Boolean = h.map(_.suit).distinct.size == 1
 
