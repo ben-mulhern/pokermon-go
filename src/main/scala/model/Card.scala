@@ -3,8 +3,9 @@ package model
 /**
   * Created by mulhernb on 23/02/17.
   */
-case class Card(suit: Suit, rank: Rank) {
+case class Card(suit: Suit, rank: Rank) extends Ordered[Card] {
   override def toString = s"$rank of $suit"
+  def compare(that: Card) = this.rank.compare(that.rank)
 }
 
 sealed trait Suit
@@ -33,8 +34,8 @@ case object Ace extends Rank {val value = 14}
 
 case class Deck(cards: List[Card]) {
   def shuffle: Deck = Deck(util.Random.shuffle(cards))
-  val size: Int = cards.size
-  val nextCard: (Card, Deck) = (cards.head, Deck(cards.tail))
+  lazy val size: Int = cards.size
+  lazy val nextCard: (Card, Deck) = (cards.head, Deck(cards.tail))
 }
 
 object Deck {
