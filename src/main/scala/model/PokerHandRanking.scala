@@ -1,17 +1,19 @@
 package model
 
-/**
-  * Created by mulhernb on 23/02/17.
-  */
+
 sealed trait PokerHandRanking extends Ordered[PokerHandRanking]{
   def score: Int
-  def compare(that: PokerHandRanking) = { this.score compare that.score}
+  def compare(that: PokerHandRanking) = {
+
+    this.score compare that.score
+  }
 }
 
 
 case class HighCard(r1: Rank, r2: Rank, r3: Rank, r4: Rank, r5: Rank) extends PokerHandRanking{
   def score = 1
   override def compare(that: PokerHandRanking) = {
+
     that match {
       case x: HighCard => (r1,r2,r3,r4,r5) compare (x.r1, x.r2, x.r3, x.r4, x.r5)
       case _ => super.compare(that)
@@ -102,4 +104,6 @@ case class RoyalFlush() extends PokerHandRanking{
     }
   }
 }
+
+
 
