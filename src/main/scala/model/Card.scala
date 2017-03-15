@@ -36,6 +36,11 @@ case class Deck(cards: List[Card]) {
   def shuffle: Deck = Deck(util.Random.shuffle(cards))
   lazy val size: Int = cards.size
   lazy val nextCard: (Card, Deck) = (cards.head, Deck(cards.tail))
+  def dealCards(x: Int): (List[Card], Deck) = {
+    val (c, d) = cards.splitAt(x)
+    (c, Deck(d))
+  }
+
 }
 
 object Deck {
