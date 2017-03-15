@@ -24,7 +24,7 @@ case class PokerHand (c1: Card, c2: Card, c3: Card, c4: Card, c5: Card) extends 
   private val straight: Boolean =
     aceLowStraight ||
       (orderedRanks.distinct.size == 5 &&
-      orderedRanks(4).value - orderedRanks.head.value == 4)
+      orderedRanks.head.value - orderedRanks(4).value == 4)
 
   lazy val commonValues: List[(Int, Rank)] = orderedRanks.groupBy(x => x).mapValues(_.size).toList.map(x => (x._2, x._1)).sortBy(x => (x._1, x._2.value)).reverse
 
