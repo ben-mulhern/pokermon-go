@@ -31,9 +31,9 @@ case class PokerGame(players: List[Player]) {
   val s1 = s.revealFlop
   println(s"The flop is ${s1.flop}")
   val s2 = s1.revealTurn
-  println(s"The turn is ${s2.turn}")
+  println(s"The turn is ${s2.turn.get}")
   val s3 = s2.revealRiver
-  println(s"The river is ${s3.turn}")
+  println(s"The river is ${s3.river.get}")
 
   val h = s3.hands.map(ph => (ph.player, PokerGame.bestHand(ph.hole1, ph.hole2, s3.flop.head, s3.flop(1), s3.flop(2), s3.turn.get, s3.river.get)))
   println("The player's best hands are:")
