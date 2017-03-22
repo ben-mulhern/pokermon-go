@@ -29,15 +29,19 @@ case class PokerGame(players: List[Player]) {
 
   val s = PokerGameState.newGame(players)
   val s1 = s.revealFlop
+  println(s"The flop is ${s1.flop}")
   val s2 = s1.revealTurn
+  println(s"The turn is ${s2.turn}")
   val s3 = s2.revealRiver
+  println(s"The river is ${s3.turn}")
 
   val h = s3.hands.map(ph => (ph.player, PokerGame.bestHand(ph.hole1, ph.hole2, s3.flop.head, s3.flop(1), s3.flop(2), s3.turn.get, s3.river.get)))
+  println("The player's best hands are:")
+  h.foreach(x => println(s"${x._1.name} - ${x._2.score}"))
 
-  val winner = h.maxBy(_._2)
-  println(s"The winner is ${winner._1.name} with a ${winner._2.score}")
 }
 
+case class PlayerPokerHand(player: Player, hole1: Card, hole2: Card)
 case class PokerGameState(hands: List[PlayerPokerHand], flop: List[Card], turn: Option[Card], river: Option[Card], deck: Deck) {
 
   def revealFlop: PokerGameState = {
@@ -73,4 +77,3 @@ object PokerGameState {
 
 }
 
-case class PlayerPokerHand(player: Player, hole1: Card, hole2: Card)
