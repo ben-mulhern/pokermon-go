@@ -6,6 +6,7 @@ import sqlest.ast._
 import model._
 import dal.table._
 import dal.PokerTableExtractor._
+import dal.PlayerExtractor._
 
 trait PokerTableDal extends SqlestDb{
 
@@ -40,14 +41,24 @@ trait PokerTableDal extends SqlestDb{
   def joinTable(table: PokerTable, player: Player): Int ={
 
     //TODO: need to check table,player exists and record does not exist
+    database.withTransaction { implicit transaction =>
+      insert
+        .into(PokerTablePlayerTable)
+        .values(
+          Setter(PokerTablePlayerTable.pokerTableId, table.id),
+          Setter(PokerTablePlayerTable.playerId, player.id.get)
+        ).execute
+    }
 
-    insert
-      .into(PokerTablePlayerTable)
-      .values(
-        Setter(PokerTablePlayerTable.pokerTableId, table.id),
-        Setter(PokerTablePlayerTable.playerId, player.id.get)
-      ).execute
+  }
 
+  def listPlayers(tableId: Int): List[Player] ={
+
+    select
+      .from(PokerTablePlayerTable)
+        .innerJoin(PlayerTable).on(PokerTablePlayerTable.playerId === PlayerTable.id)
+      .where(PokerTablePlayerTable.pokerTableId === tableId)
+      .extractAll(playerExtractor)
 
 
   }
