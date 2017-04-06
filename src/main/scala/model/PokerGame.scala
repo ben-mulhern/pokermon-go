@@ -46,8 +46,8 @@ case class PokerGameState(hands: List[PlayerPokerHand], flop: List[Card], turn: 
 
   def revealFlop: PokerGameState = {
     if (flop.nonEmpty) throw new Exception("Flop already revealed")
-    val (f, d) = deck.dealCards(3)
-    PokerGameState(hands, f, None, None, d)
+    val (f, d) = deck.deal(1, 3)
+    PokerGameState(hands, f.head, None, None, d)
   }
 
   def revealTurn: PokerGameState = {
@@ -70,8 +70,9 @@ object PokerGameState {
   def newGame(players: List[Player]): PokerGameState = {
     val d = Deck.newDeck().shuffle
     val p = players.size
-    val (holeCards, d2) = d.dealCards((p * 2))
-    val hands = (0 until p).map(i => PlayerPokerHand(players(i), holeCards(i), holeCards(p + i))).toList
+    val (holeCards, d2) = d.deal(p, 2)
+    val playersWithHands = players zip holeCards
+    val hands = playersWithHands.map(x => PlayerPokerHand(x._1, x._2.head, x._2(1)))
     PokerGameState(hands, Nil, None, None, d2)
   }
 

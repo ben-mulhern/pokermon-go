@@ -1,6 +1,9 @@
 package model
 
 /**
-  * Created by mulhernb on 15/03/17.
+  * Created by finnk on 15/03/2017.
   */
-case class Player(name: String)
+case class Player(id: Option[Int] = None, name: String, username: String, email: String) {
+
+}
+
