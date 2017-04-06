@@ -32,6 +32,7 @@ case object Queen extends Rank {val value = 12}
 case object King extends Rank {val value = 13}
 case object Ace extends Rank {val value = 14}
 
+<<<<<<< HEAD
 case class Deck(cards: List[Card]) {
   def shuffle: Deck = Deck(util.Random.shuffle(cards))
   lazy val size: Int = cards.size
@@ -42,6 +43,8 @@ case class Deck(cards: List[Card]) {
   }
 
 }
+=======
+>>>>>>> origin/karl
 
 object Deck {
   val allSuits: List[Suit] = List(Spades, Hearts, Diamonds, Clubs)
