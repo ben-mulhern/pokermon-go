@@ -6,4 +6,4 @@ CREATE TABLE poker_table (
     CHECK(chip_currency_exchange_rate > 0),
 
   CONSTRAINT PK_poker_table PRIMARY KEY  (poker_table_id)
-)
+);

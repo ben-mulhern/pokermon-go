@@ -12,5 +12,4 @@ CREATE TABLE player (
   password_hash VARCHAR(100) NOT NULL,
 
   CONSTRAINT PK_player PRIMARY KEY (player_id)
-
-)
+);
