@@ -24,3 +24,57 @@ object PokerGame {
 
   }
 }
+
+case class PokerGame(players: List[Player]) {
+
+  val s = PokerGameState.newGame(players)
+  val s1 = s.revealFlop
+  println(s"The flop is ${s1.flop}")
+  val s2 = s1.revealTurn
+  println(s"The turn is ${s2.turn.get}")
+  val s3 = s2.revealRiver
+  println(s"The river is ${s3.river.get}")
+
+  val h = s3.hands.map(ph => (ph.player, PokerGame.bestHand(ph.hole1, ph.hole2, s3.flop.head, s3.flop(1), s3.flop(2), s3.turn.get, s3.river.get)))
+  println("The player's best hands are:")
+  h.foreach(x => println(s"${x._1.name} - ${x._2.score}"))
+
+}
+
+case class PlayerPokerHand(player: Player, hole1: Card, hole2: Card)
+case class PokerGameState(hands: List[PlayerPokerHand], flop: List[Card], turn: Option[Card], river: Option[Card], deck: Deck) {
+
+  def revealFlop: PokerGameState = {
+    if (flop.nonEmpty) throw new Exception("Flop already revealed")
+    val (f, d) = deck.deal(1, 3)
+    PokerGameState(hands, f.head, None, None, d)
+  }
+
+  def revealTurn: PokerGameState = {
+    if (turn.nonEmpty) throw new Exception("Turn already revealed")
+    if (flop.isEmpty) throw new Exception("Flop not revealed yet")
+    val (t, d) = deck.nextCard
+    PokerGameState(hands, flop, Some(t), None, d)
+  }
+
+  def revealRiver: PokerGameState = {
+    if (river.nonEmpty) throw new Exception("River already revealed")
+    if (turn.isEmpty) throw new Exception("Turn not revealed yet")
+    val (r, d) = deck.nextCard
+    PokerGameState(hands, flop, turn, Some(r), d)
+  }
+}
+
+object PokerGameState {
+
+  def newGame(players: List[Player]): PokerGameState = {
+    val d = Deck.newDeck().shuffle
+    val p = players.size
+    val (holeCards, d2) = d.deal(p, 2)
+    val playersWithHands = players zip holeCards
+    val hands = playersWithHands.map(x => PlayerPokerHand(x._1, x._2.head, x._2(1)))
+    PokerGameState(hands, Nil, None, None, d2)
+  }
+
+}
+

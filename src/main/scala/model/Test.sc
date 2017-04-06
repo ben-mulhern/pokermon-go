@@ -1,13 +1,9 @@
 import model._
 
-//
-//util.Random.setSeed(56)
-//
-
-val d = Deck.newDeck
-
-val c = d.shuffle.cards.take(5)
-
-Poker.group(c)
-
-Poker.getHand(c)
+val g = PokerGame(
+  List(
+    Player(name = "John", username = "JOHN", email = "john@beatles.com"),
+    Player(name = "Paul", username = "PAUL", email = "paul@beatles.com"),
+    Player(name = "Ringo", username = "RINGO", email = "ringo@beatles.com"),
+    Player(name = "George", username = "GEORGE", email = "george@beatles.com")
+  ))
