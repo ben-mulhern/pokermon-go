@@ -2,7 +2,7 @@ package dal
 
 import sqlest._
 import com.typesafe.config._
-import service.Config._
+import server.Config._
 
 trait SqlestDb {
 

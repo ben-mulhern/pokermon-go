@@ -1,3 +1,4 @@
+/*
 package dal
 
 import model._
@@ -16,3 +17,4 @@ object PokerTableExtractor {
 
   )
 }
+*/

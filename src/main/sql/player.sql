@@ -6,10 +6,10 @@ CREATE TABLE player (
     CHECK(username <> ''),
   email_address VARCHAR(256) NOT NULL UNIQUE
     CHECK(email_address <> ''),
-  cash_on_account DECIMAL(15, 2) NOT NULL
+  cash_on_account DECIMAL(15, 2) NOT NULL DEFAULT 0
     CHECK(cash_on_account >= 0),
-  password_salt VARCHAR(100) NOT NULL,
-  password_hash VARCHAR(100) NOT NULL,
+  password_salt VARCHAR(100) NOT NULL DEFAULT '',
+  password_hash VARCHAR(100) NOT NULL DEFAULT '',
 
   CONSTRAINT PK_player PRIMARY KEY (player_id)
 );

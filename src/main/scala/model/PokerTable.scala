@@ -7,6 +7,6 @@ case class PokerTable(
   id: Int, 
   name: String, 
   chipCurrencyExchangeRate: String,
-  players: List[Player],
-  rounds: List[Round]
+  players: List[Player]
+  //rounds: List[Round]
 )

@@ -9,10 +9,9 @@ import dal.table._
 object PlayerExtractor {
 
   lazy val playerExtractor = extract[Player](
-    id = PlayerTable.id,
+    id = PlayerTable.id.asOption,
     name = PlayerTable.name,
     username = PlayerTable.username,
-    email = PlayerTable.email_address
-
+    email = PlayerTable.emailAddress
   )
 }

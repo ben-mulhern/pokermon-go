@@ -1,3 +1,4 @@
+/*
 package dal
 
 import sqlest._
@@ -65,4 +66,4 @@ trait PokerTableDal extends SqlestDb{
 
 
 }
-
+*/

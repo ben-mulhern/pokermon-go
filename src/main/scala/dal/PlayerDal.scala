@@ -6,11 +6,14 @@ import sqlest.ast._
 import model._
 import dal.table.PlayerTable
 import dal.PlayerExtractor._
+import response._
 
-trait PlayerDal extends SqlestDb{
+trait PlayerDal extends SqlestDb {
 
 
   def getPlayer(id: Int): Option[Player] = {
+
+    println(s"Retrieving player $id from the database")
 
     val query =
       select
@@ -21,7 +24,7 @@ trait PlayerDal extends SqlestDb{
 
   }
 
-  def createPlayer(player: Player): Int ={
+  def createPlayer(player: Player): ActionResponse[Int] ={
 
     database.withTransaction { implicit transaction =>
       val x = insert
@@ -29,10 +32,10 @@ trait PlayerDal extends SqlestDb{
         .values(
           PlayerTable.name -> player.name,
           PlayerTable.username -> player.username,
-          PlayerTable.email_address -> player.email
+          PlayerTable.emailAddress -> player.email
         ).executeReturningKeys[Int](transaction, IntColumnType)
 
-      x.head
+      ActionSuccess(x.head)
     }
 
   }

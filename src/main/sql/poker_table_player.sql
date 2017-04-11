@@ -1,7 +1,7 @@
 CREATE TABLE poker_table_player (
   poker_table_id INT NOT NULL,
   player_id INT NOT NULL,
-  remaining_funds DECIMAL(15, 2) NOT NULL
+  remaining_funds DECIMAL(15, 2) NOT NULL DEFAULT 0
     CHECK(remaining_funds >= 0),
 
   CONSTRAINT PK_poker_table_player PRIMARY KEY (poker_table_id,  player_id),
