@@ -4,6 +4,8 @@ CREATE TABLE poker_table (
     CHECK(poker_table_name <> ''),
   chip_currency_exchange_rate DECIMAL(19, 9)
     CHECK(chip_currency_exchange_rate > 0),
+  active CHAR(1) NOT NULL DEFAULT 'Y'
+    CHECK (active IN ('Y', 'N')),
 
   CONSTRAINT PK_poker_table PRIMARY KEY  (poker_table_id)
 );

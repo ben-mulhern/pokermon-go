@@ -9,7 +9,8 @@ class PokerTableTable(alias: Option[String]) extends Table("poker_table", alias)
 
     val id   = column[Int]("poker_table_id")
     val name = column[String]("poker_table_name")
-    val unitOfWager   = column[String]("unit_of_wager")
+    val chipCurrencyExchangeRate = colmun[Int]("chip_currency_exchange_rate")
+    val active = column[Boolean]("active")(BooleanYNColumnType)
 
 }
 
