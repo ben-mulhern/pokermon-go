@@ -1,3 +1,4 @@
+/*
 package dal.table
 
 import sqlest._
@@ -11,4 +12,4 @@ class PokerTablePlayerTable(alias: Option[String]) extends Table("poker_table_pl
 }
 
 object PokerTablePlayerTable extends PokerTablePlayerTable(None)
-
+*/
